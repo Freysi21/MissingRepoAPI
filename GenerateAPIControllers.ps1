@@ -7,7 +7,7 @@ Foreach-Object {
     '-name ' + $_.BaseName + 'Controller ' +
     '-api ' + 
     '-m API.Models.' + $_.BaseName + ' ' +
-    '-dc MissingItemReportsContext ' +
+    '-dc MissingReportsContext ' +
     '-outDir Controllers ' +
     '-namespace API.Controllers'
 

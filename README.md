@@ -9,6 +9,6 @@ dotnet add package MailKit
 dotnet tool install dotnet-ef --global
 dotnet tool install dotnet-aspnet-codegenerator
 
-dotnet ef dbcontext scaffold "Server=RLSFT20002\SQLEXPRESS;Database=MissingItemReports;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+dotnet ef dbcontext scaffold "Server=RLSFT20002\SQLEXPRESS;Database=MissingReports;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
 ./GenerateAPIControllers.ps1
 ```

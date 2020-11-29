@@ -14,9 +14,9 @@ namespace API.Controllers
     [ApiController]
     public class ReporterController : ControllerBase
     {
-        private readonly MissingItemReportsContext _context;
+        private readonly MissingReportsContext _context;
 
-        public ReporterController(MissingItemReportsContext context)
+        public ReporterController(MissingReportsContext context)
         {
             _context = context;
         }
@@ -28,9 +28,17 @@ namespace API.Controllers
             return await _context.Reporters.ToListAsync();
         }
 
+        // GET: api/Reporter
+        [HttpGet("ssn/{ssn}")]
+        public async Task<ActionResult<Reporter>> GetReporterBySSN(string ssn)
+        {
+            return await _context.Reporters.Where(x => x.Ssn == ssn).FirstOrDefaultAsync();
+        }
+
+
         // GET: api/Reporter/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Reporter>> GetReporter(int id)
+        public async Task<ActionResult<Reporter>> GetReporter(Guid id)
         {
             var reporter = await _context.Reporters.FindAsync(id);
 
@@ -45,7 +53,7 @@ namespace API.Controllers
         // PUT: api/Reporter/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReporter(int id, Reporter reporter)
+        public async Task<IActionResult> PutReporter(Guid id, Reporter reporter)
         {
             if (id != reporter.Id)
             {
@@ -86,7 +94,7 @@ namespace API.Controllers
 
         // DELETE: api/Reporter/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReporter(int id)
+        public async Task<IActionResult> DeleteReporter(Guid id)
         {
             var reporter = await _context.Reporters.FindAsync(id);
             if (reporter == null)
@@ -100,7 +108,7 @@ namespace API.Controllers
             return NoContent();
         }
 
-        private bool ReporterExists(int id)
+        private bool ReporterExists(Guid id)
         {
             return _context.Reporters.Any(e => e.Id == id);
         }
